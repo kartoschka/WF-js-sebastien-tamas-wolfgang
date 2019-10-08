@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <meta charset='utf-8'>
+  <title></title>
+  <style>
+  </style>
+</head>
+<body>
+  <p><span>ex1 age: </span><input oninput=run(this)><span>(result)</span></p>
+  <p><span>ex2 truncate end: </span><input style=width:20em oninput=run(this)><span>(result)</span></p>
+  <p><span>ex3 format personal info: </span><input style=width:20em oninput=run(this)><span>(result)</span></p>
+
+  <script>
+    function run(self, ...args) {
+      let valargs = argsplit(self.value)
+      let fun_name = self.previousElementSibling.innerHTML.replace(/: $/,'').replace(/ /g,'_')
+      let fun = window[fun_name]
+      let res = fun(...valargs, ...args)
+      self.nextElementSibling.innerHTML = res
+    }
+
+    function argsplit(inputstring) {
+      return inputstring.split(',')
+    }
+
+    function ex1_age(birthyear) {
+      let age0 = new Date().getYear() - new Date(birthyear).getYear()
+      return [age0, age0+1]
+    }
+
+    function ex2_truncate_end(target_string, by_chrs_num) {
+      return target_string.substring(0,target_string.length - by_chrs_num)
+    }
+
+    function ex3_format_personal_info(name,surname,age,descr) {
+      let cptlze = (word)=>word ? word.substring(0,1).toUpperCase()+word.substring(1) : '???'
+
+      return `Hi. my name is ${cptlze(name)} ${cptlze(surname)} and I am ${age} years old. ${cptlze(descr)}.`
+    }
+  </script>
+</body>
+</html>
+
