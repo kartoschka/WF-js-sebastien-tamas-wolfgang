@@ -11,3 +11,10 @@ var rollTheDice = function(){
     }
     document.getElementById('dice').innerHTML = output;
 }
+
+
+function meifunction(){
+	var text;
+	var player1 = prompt("Hansi");
+	var player2 = prompt(se)
+}
